@@ -197,3 +197,4 @@ if __name__ == "__main__":
     searcher = WikipediaSearcher()
     # Запускаем основной процесс
     searcher.run()
+    
