@@ -1,4 +1,4 @@
-# -*- coding: windows-1251 -*-
+# -*- coding: utf-8 -*-
 import urllib.parse
 import urllib.request
 import json
@@ -9,23 +9,23 @@ class WikipediaSearcher:
         self.BASE_URL = "https://ru.wikipedia.org/w/api.php"
 
     def get_user_input(self):
-        return input("Введите поисковый запрос: ").strip()
+        return input("Р’РІРµРґРёС‚Рµ РїРѕРёСЃРєРѕРІС‹Р№ Р·Р°РїСЂРѕСЃ: ").strip()
 
     def encode_query(self, query):
-        # Правильное кодирование для URL с учетом русских символов
+        # РџСЂР°РІРёР»СЊРЅРѕРµ РєРѕРґРёСЂРѕРІР°РЅРёРµ РґР»СЏ URL СЃ СѓС‡РµС‚РѕРј СЂСѓСЃСЃРєРёС… СЃРёРјРІРѕР»РѕРІ
         return urllib.parse.quote(query.encode('utf-8'))
 
     def search_with_api(self, query):
-        """Используем API Wikipedia для поиска"""
+        """РСЃРїРѕР»СЊР·СѓРµРј API Wikipedia РґР»СЏ РїРѕРёСЃРєР°"""
         encoded_query = self.encode_query(query)
         
-        # Пробуем разные варианты API запросов
+        # РџСЂРѕР±СѓРµРј СЂР°Р·РЅС‹Рµ РІР°СЂРёР°РЅС‚С‹ API Р·Р°РїСЂРѕСЃРѕРІ
         api_methods = [
-            # Метод opensearch (похож на автодополнение в Wikipedia)
+            # РњРµС‚РѕРґ opensearch (РїРѕС…РѕР¶ РЅР° Р°РІС‚РѕРґРѕРїРѕР»РЅРµРЅРёРµ РІ Wikipedia)
             f"https://ru.wikipedia.org/w/api.php?action=opensearch&search={encoded_query}&limit=10&namespace=0&format=json",
-            # Метод query (стандартный поиск)
+            # РњРµС‚РѕРґ query (СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РїРѕРёСЃРє)
             f"https://ru.wikipedia.org/w/api.php?action=query&list=search&srsearch={encoded_query}&srlimit=10&format=json",
-            # Метод для поиска по заголовкам
+            # РњРµС‚РѕРґ РґР»СЏ РїРѕРёСЃРєР° РїРѕ Р·Р°РіРѕР»РѕРІРєР°Рј
             f"https://ru.wikipedia.org/w/api.php?action=query&list=search&srsearch={encoded_query}&srwhat=title&srlimit=10&format=json"
         ]
         
@@ -44,16 +44,16 @@ class WikipediaSearcher:
                     if results:
                         return results
             except Exception as e:
-                print(f"Ошибка при запросе к API: {e}")
+                print(f"РћС€РёР±РєР° РїСЂРё Р·Р°РїСЂРѕСЃРµ Рє API: {e}")
                 continue
                 
         return []
 
     def parse_api_response(self, data, api_url):
-        """Парсим ответ от API Wikipedia"""
+        """РџР°СЂСЃРёРј РѕС‚РІРµС‚ РѕС‚ API Wikipedia"""
         results = []
         
-        # Обработка ответа от opensearch API
+        # РћР±СЂР°Р±РѕС‚РєР° РѕС‚РІРµС‚Р° РѕС‚ opensearch API
         if 'opensearch' in api_url:
             if isinstance(data, list) and len(data) > 1:
                 titles = data[1]
@@ -64,7 +64,7 @@ class WikipediaSearcher:
                         'pageid': pageid
                     })
         
-        # Обработка ответа от query API
+        # РћР±СЂР°Р±РѕС‚РєР° РѕС‚РІРµС‚Р° РѕС‚ query API
         elif 'query' in api_url:
             if 'query' in data and 'search' in data['query']:
                 for item in data['query']['search']:
@@ -76,7 +76,7 @@ class WikipediaSearcher:
         return results
 
     def get_pageid_from_title(self, title):
-        """Получаем pageid по заголовку статьи"""
+        """РџРѕР»СѓС‡Р°РµРј pageid РїРѕ Р·Р°РіРѕР»РѕРІРєСѓ СЃС‚Р°С‚СЊРё"""
         encoded_title = self.encode_query(title)
         url = f"https://ru.wikipedia.org/w/api.php?action=query&format=json&titles={encoded_title}"
         
@@ -98,10 +98,10 @@ class WikipediaSearcher:
 
     def display_results(self, results, query):
         if not results:
-            print(f"По запросу '{query}' не найдено подходящих статей.")
+            print(f"РџРѕ Р·Р°РїСЂРѕСЃСѓ '{query}' РЅРµ РЅР°Р№РґРµРЅРѕ РїРѕРґС…РѕРґСЏС‰РёС… СЃС‚Р°С‚РµР№.")
             return False
 
-        print(f"\nРезультаты поиска для '{query}':")
+        print(f"\nР РµР·СѓР»СЊС‚Р°С‚С‹ РїРѕРёСЃРєР° РґР»СЏ '{query}':")
         print("=" * 60)
         
         for i, item in enumerate(results, 1):
@@ -113,15 +113,15 @@ class WikipediaSearcher:
     def select_article(self, results):
         while True:
             try:
-                choice = input("\nВведите номер статьи для открытия (или 'q' для выхода): ").strip()
+                choice = input("\nР’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ СЃС‚Р°С‚СЊРё РґР»СЏ РѕС‚РєСЂС‹С‚РёСЏ (РёР»Рё 'q' РґР»СЏ РІС‹С…РѕРґР°): ").strip()
                 if choice.lower() == 'q':
                     return None, None
                 choice = int(choice)
                 if 1 <= choice <= len(results):
                     return results[choice-1]['pageid'], results[choice-1]['title']
-                print(f"Пожалуйста, введите число от 1 до {len(results)}")
+                print(f"РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІРІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РѕС‚ 1 РґРѕ {len(results)}")
             except ValueError:
-                print("Пожалуйста, введите число.")
+                print("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІРІРµРґРёС‚Рµ С‡РёСЃР»Рѕ.")
 
     def open_in_browser(self, pageid, title, query):
         if pageid:
@@ -130,35 +130,35 @@ class WikipediaSearcher:
             encoded_title = self.encode_query(title)
             url = f"https://ru.wikipedia.org/wiki/{encoded_title}"
         else:
-            # Если ничего не нашли, открываем страницу поиска
+            # Р•СЃР»Рё РЅРёС‡РµРіРѕ РЅРµ РЅР°С€Р»Рё, РѕС‚РєСЂС‹РІР°РµРј СЃС‚СЂР°РЅРёС†Сѓ РїРѕРёСЃРєР°
             encoded_query = self.encode_query(query)
             url = f"https://ru.wikipedia.org/w/index.php?search={encoded_query}"
         
-        print(f"Открываю: {url}")
+        print(f"РћС‚РєСЂС‹РІР°СЋ: {url}")
         webbrowser.open(url)
 
     def run(self):
         try:
             query = self.get_user_input()
             if not query:
-                print("Запрос не может быть пустым.")
+                print("Р—Р°РїСЂРѕСЃ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј.")
                 return
 
-            print(f"Ищем '{query}' в Wikipedia...")
+            print(f"РС‰РµРј '{query}' РІ Wikipedia...")
             results = self.search_with_api(query)
 
             if self.display_results(results, query):
                 pageid, title = self.select_article(results)
                 self.open_in_browser(pageid, title, query)
             else:
-                # Если не нашли результатов, открываем страницу поиска
-                print("Открываю страницу поиска Wikipedia...")
+                # Р•СЃР»Рё РЅРµ РЅР°С€Р»Рё СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ, РѕС‚РєСЂС‹РІР°РµРј СЃС‚СЂР°РЅРёС†Сѓ РїРѕРёСЃРєР°
+                print("РћС‚РєСЂС‹РІР°СЋ СЃС‚СЂР°РЅРёС†Сѓ РїРѕРёСЃРєР° Wikipedia...")
                 encoded_query = self.encode_query(query)
                 url = f"https://ru.wikipedia.org/w/index.php?search={encoded_query}"
                 webbrowser.open(url)
 
         except Exception as e:
-            print(f"Произошла ошибка: {e}")
+            print(f"РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°: {e}")
 
 if __name__ == "__main__":
     searcher = WikipediaSearcher()
