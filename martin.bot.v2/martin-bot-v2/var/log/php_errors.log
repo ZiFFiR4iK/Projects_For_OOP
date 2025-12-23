@@ -1,0 +1,68 @@
+[2025-10-23 22:35:10] InvalidArgumentException: ApplicationAction requires MartinBotApplicationHandler in /var/www/html/src/Telegram/Handlers/Actions/Applications/ApplicationAction.php on line 17
+Stack trace:
+#0 /var/www/html/src/Telegram/Handlers/BaseMartinBotConversationHandler.php(99): App\Telegram\Handlers\Actions\Applications\ApplicationAction->__construct(Object(App\Telegram\Handlers\SupportHandler\UserInstructionsConversationHandler))
+#1 /var/www/html/src/Telegram/Handlers/SupportHandler/UserInstructionsConversationHandler.php(41): App\Telegram\Handlers\BaseMartinBotConversationHandler->handleConversationAction('start')
+#2 /var/www/html/src/Telegram/Handlers/BaseMartinBotConversationHandler.php(138): App\Telegram\Handlers\SupportHandler\UserInstructionsConversationHandler->handleUpdate()
+#3 /var/www/html/src/Telegram/Commands/GenericMessageCommand.php(80): App\Telegram\Handlers\BaseMartinBotConversationHandler->execute()
+#4 /var/www/html/vendor/longman/telegram-bot/src/Commands/Command.php(204): App\Telegram\Commands\GenericMessageCommand->execute()
+#5 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(686): Longman\TelegramBot\Commands\Command->preExecute()
+#6 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(657): Longman\TelegramBot\Telegram->executeCommand('genericmessage')
+#7 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(527): Longman\TelegramBot\Telegram->processUpdate(Object(Longman\TelegramBot\Entities\Update))
+#8 /var/www/html/src/Telegram/TelegramBot.php(38): Longman\TelegramBot\Telegram->handleGetUpdates()
+#9 /var/www/html/src/Telegram/Kernel.php(31): App\Telegram\TelegramBot->start()
+#10 /var/www/html/index.php(19): App\Telegram\Kernel->handle()
+#11 {main}
+
+[2025-10-23 22:36:43] Longman\TelegramBot\Exception\TelegramException: Cannot open "/storage/Instruction.pdf" for reading in /var/www/html/vendor/longman/telegram-bot/src/Request.php on line 693
+Stack trace:
+#0 /var/www/html/src/Telegram/Handlers/Actions/BaseMartinBotConversationAction.php(55): Longman\TelegramBot\Request::encodeFile('/storage/Instru...')
+#1 /var/www/html/src/Telegram/Handlers/Actions/ShowInstructionsActions.php(27): App\Telegram\Handlers\Actions\BaseMartinBotConversationAction->sendDocument('/storage/Instru...')
+#2 /var/www/html/src/Telegram/Handlers/Actions/ShowInstructionsActions.php(18): App\Telegram\Handlers\Actions\ShowInstructionsActions->makeResponse('\xF0\x9F\x93\x9D \xD0\x9E\xD1\x82\xD0\xBF\xD1\x80\xD0\xB0...')
+#3 /var/www/html/src/Telegram/Handlers/Actions/BaseMartinBotConversationAction.php(111): App\Telegram\Handlers\Actions\ShowInstructionsActions->handle('\xF0\x9F\x93\x9D \xD0\x9E\xD1\x82\xD0\xBF\xD1\x80\xD0\xB0...')
+#4 /var/www/html/src/Telegram/Handlers/BaseMartinBotConversationHandler.php(99): App\Telegram\Handlers\Actions\BaseMartinBotConversationAction->getResponse(Object(Longman\TelegramBot\Entities\Message))
+#5 /var/www/html/src/Telegram/Handlers/SupportHandler/UserInstructionsConversationHandler.php(41): App\Telegram\Handlers\BaseMartinBotConversationHandler->handleConversationAction('show_instructio...')
+#6 /var/www/html/src/Telegram/Handlers/BaseMartinBotConversationHandler.php(138): App\Telegram\Handlers\SupportHandler\UserInstructionsConversationHandler->handleUpdate()
+#7 /var/www/html/src/Telegram/Commands/MartinCommand/MartinSystemCommand.php(28): App\Telegram\Handlers\BaseMartinBotConversationHandler->execute()
+#8 /var/www/html/src/Telegram/Commands/GenericMessageCommand.php(67): App\Telegram\Commands\MartinCommand\MartinSystemCommand->executeHandler('user-instructio...')
+#9 /var/www/html/vendor/longman/telegram-bot/src/Commands/Command.php(204): App\Telegram\Commands\GenericMessageCommand->execute()
+#10 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(686): Longman\TelegramBot\Commands\Command->preExecute()
+#11 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(657): Longman\TelegramBot\Telegram->executeCommand('genericmessage')
+#12 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(527): Longman\TelegramBot\Telegram->processUpdate(Object(Longman\TelegramBot\Entities\Update))
+#13 /var/www/html/src/Telegram/TelegramBot.php(38): Longman\TelegramBot\Telegram->handleGetUpdates()
+#14 /var/www/html/src/Telegram/Kernel.php(31): App\Telegram\TelegramBot->start()
+#15 /var/www/html/index.php(19): App\Telegram\Kernel->handle()
+#16 {main}
+
+[2025-10-23 22:43:10] SM\SMException: Transition "to_handler_cancelled" does not exist on object "App\Telegram\Conversations\Admin\AdminMenuConversation" with graph "admin_menu " in /var/www/html/vendor/winzou/state-machine/src/SM/StateMachine/StateMachine.php on line 79
+Stack trace:
+#0 /var/www/html/src/Telegram/Handlers/BaseMartinBotConversationHandler.php(85): SM\StateMachine\StateMachine->can('to_handler_canc...')
+#1 /var/www/html/src/Telegram/Handlers/BaseMartinBotConversationHandler.php(108): App\Telegram\Handlers\BaseMartinBotConversationHandler->handleTransition('to_handler_canc...')
+#2 /var/www/html/src/Telegram/Handlers/Actions/BaseMartinBotConversationAction.php(116): App\Telegram\Handlers\BaseMartinBotConversationHandler->transition('to_handler_canc...')
+#3 /var/www/html/src/Telegram/Handlers/Actions/Admin/ShowAdminMenuAction.php(20): App\Telegram\Handlers\Actions\BaseMartinBotConversationAction->transit('to_handler_canc...')
+#4 /var/www/html/src/Telegram/Handlers/Actions/BaseMartinBotConversationAction.php(111): App\Telegram\Handlers\Actions\Admin\ShowAdminMenuAction->handle(Object(Longman\TelegramBot\Entities\Message))
+#5 /var/www/html/src/Telegram/Handlers/BaseMartinBotConversationHandler.php(99): App\Telegram\Handlers\Actions\BaseMartinBotConversationAction->getResponse(Object(Longman\TelegramBot\Entities\Message))
+#6 /var/www/html/src/Telegram/Handlers/Admin/AdminConversationsActionsHandler.php(44): App\Telegram\Handlers\BaseMartinBotConversationHandler->handleConversationAction('admin_menu')
+#7 /var/www/html/src/Telegram/Handlers/BaseMartinBotConversationHandler.php(138): App\Telegram\Handlers\Admin\AdminConversationsActionsHandler->handleUpdate()
+#8 /var/www/html/src/Telegram/Commands/MartinCommand/MartinSystemCommand.php(28): App\Telegram\Handlers\BaseMartinBotConversationHandler->execute()
+#9 /var/www/html/src/Telegram/Commands/GenericMessageCommand.php(67): App\Telegram\Commands\MartinCommand\MartinSystemCommand->executeHandler('admin-conversat...')
+#10 /var/www/html/vendor/longman/telegram-bot/src/Commands/Command.php(204): App\Telegram\Commands\GenericMessageCommand->execute()
+#11 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(686): Longman\TelegramBot\Commands\Command->preExecute()
+#12 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(657): Longman\TelegramBot\Telegram->executeCommand('genericmessage')
+#13 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(527): Longman\TelegramBot\Telegram->processUpdate(Object(Longman\TelegramBot\Entities\Update))
+#14 /var/www/html/src/Telegram/TelegramBot.php(38): Longman\TelegramBot\Telegram->handleGetUpdates()
+#15 /var/www/html/src/Telegram/Kernel.php(31): App\Telegram\TelegramBot->start()
+#16 /var/www/html/index.php(19): App\Telegram\Kernel->handle()
+#17 {main}
+
+[2025-10-23 23:09:42] Longman\TelegramBot\Exception\TelegramException: Cannot open "/storage/martin.jpeg" for reading in /var/www/html/vendor/longman/telegram-bot/src/Request.php on line 693
+Stack trace:
+#0 /var/www/html/src/Telegram/Commands/StartBotCommand.php(74): Longman\TelegramBot\Request::encodeFile('/storage/martin...')
+#1 /var/www/html/vendor/longman/telegram-bot/src/Commands/Command.php(204): App\Telegram\Commands\StartBotCommand->execute()
+#2 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(686): Longman\TelegramBot\Commands\Command->preExecute()
+#3 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(657): Longman\TelegramBot\Telegram->executeCommand('start')
+#4 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(527): Longman\TelegramBot\Telegram->processUpdate(Object(Longman\TelegramBot\Entities\Update))
+#5 /var/www/html/src/Telegram/TelegramBot.php(38): Longman\TelegramBot\Telegram->handleGetUpdates()
+#6 /var/www/html/src/Telegram/Kernel.php(31): App\Telegram\TelegramBot->start()
+#7 /var/www/html/index.php(19): App\Telegram\Kernel->handle()
+#8 {main}
+

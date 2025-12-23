@@ -1,0 +1,18 @@
+[2025-10-23 23:54:38] App\Telegram\Exception\MartinBotException: Ваша заявка с указанными номером не найдена in /var/www/html/src/Telegram/Db/ApplicationDB.php on line 33
+Stack trace:
+#0 /var/www/html/src/Telegram/Handlers/Actions/ApplicationStatus/CheckPaymentApplicationStatusAction.php(31): App\Telegram\Db\ApplicationDB::getById(Object(App\Telegram\Conversations\ApplicationStatusConversation), 5)
+#1 /var/www/html/src/Telegram/Handlers/Actions/ApplicationStatus/CheckPaymentApplicationStatusAction.php(20): App\Telegram\Handlers\Actions\ApplicationStatus\CheckPaymentApplicationStatusAction->handleInputApplicationNumber('5')
+#2 /var/www/html/src/Telegram/Handlers/Actions/BaseMartinBotConversationAction.php(111): App\Telegram\Handlers\Actions\ApplicationStatus\CheckPaymentApplicationStatusAction->handle(Object(Longman\TelegramBot\Entities\Message))
+#3 /var/www/html/src/Telegram/Handlers/ApplicationHandler/CheckApplicationStatusConversationHandler.php(48): App\Telegram\Handlers\Actions\BaseMartinBotConversationAction->getResponse(Object(Longman\TelegramBot\Entities\Message))
+#4 /var/www/html/src/Telegram/Handlers/BaseMartinBotConversationHandler.php(138): App\Telegram\Handlers\ApplicationHandler\CheckApplicationStatusConversationHandler->handleUpdate()
+#5 /var/www/html/src/Telegram/Commands/MartinCommand/MartinSystemCommand.php(28): App\Telegram\Handlers\BaseMartinBotConversationHandler->execute()
+#6 /var/www/html/src/Telegram/Commands/GenericMessageCommand.php(67): App\Telegram\Commands\MartinCommand\MartinSystemCommand->executeHandler('check-status-ha...')
+#7 /var/www/html/vendor/longman/telegram-bot/src/Commands/Command.php(204): App\Telegram\Commands\GenericMessageCommand->execute()
+#8 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(686): Longman\TelegramBot\Commands\Command->preExecute()
+#9 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(657): Longman\TelegramBot\Telegram->executeCommand('genericmessage')
+#10 /var/www/html/vendor/longman/telegram-bot/src/Telegram.php(527): Longman\TelegramBot\Telegram->processUpdate(Object(Longman\TelegramBot\Entities\Update))
+#11 /var/www/html/src/Telegram/TelegramBot.php(38): Longman\TelegramBot\Telegram->handleGetUpdates()
+#12 /var/www/html/src/Telegram/Kernel.php(31): App\Telegram\TelegramBot->start()
+#13 /var/www/html/index.php(19): App\Telegram\Kernel->handle()
+#14 {main}
+

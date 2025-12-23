@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+use App\Config;
+
+require __DIR__.'/vendor/autoload.php';
+
+/** @var \App\Application $app */
+$app = require_once __DIR__.'/bootstrap/app.php';
+
+$kernel = $app->makeConsoleKernel();
+
+$input = $_SERVER['argv'];
+
+$kernel->handle($input);

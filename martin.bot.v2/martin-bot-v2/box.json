@@ -1,0 +1,21 @@
+{
+  "main": "index.php",
+  "output": "bot.phar",
+  "directories": ["src", "vendor", "database", "config", "bootstrap", "storage", "var"],
+  "files": ["composer.json", "composer.lock", ".env"],
+  "stub": true,
+
+  "dump-autoload": false,
+  "exclude-dev-files": true,
+
+  "blacklist": [
+    "vendor/humbug/php-scoper/**",
+    "vendor/bin/**",
+    "tests/**",
+    "vendor/**/tests/**",
+    ".git/**",
+    ".github/**"
+  ],
+
+  "compression": "GZ"
+}

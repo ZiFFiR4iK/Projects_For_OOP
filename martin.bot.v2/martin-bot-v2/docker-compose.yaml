@@ -1,0 +1,35 @@
+services:
+  php-martin:
+    build:
+      dockerfile: Dockerfile
+    container_name: martin-php
+    volumes:
+      - .:/var/www/html:cached
+    depends_on:
+      - db-mysql-martin
+    networks:
+      - martin-network
+
+  db-mysql-martin:
+    image: mysql:8.0
+    container_name: martin-bot-mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: martin-bot
+      MYSQL_USER: martin
+      MYSQL_PASSWORD: martin
+      MYSQL_ROOT_PASSWORD: rootsecret
+    ports:
+      - "33006:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - martin-network
+
+
+
+volumes:
+  dbdata:
+
+networks:
+  martin-network:
